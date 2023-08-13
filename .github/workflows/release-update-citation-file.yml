@@ -15,13 +15,19 @@ jobs:
           fetch-depth: 0
           ref: main
 
-      - name: Update CITATION.cff version and date-released
+      - name: Get current date
+        run: |
+          echo "CURRENT_DATE=$(date '+%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: Update CITATION.cff version
         uses: mikefarah/yq@v4.34.2
         with:
-          cmd: |
-            echo "CURRENT_DATE=$(date '+%Y-%m-%d')" >> $GITHUB_ENV
-            yq eval -i '.version="${{ github.event.release.tag_name }}"' CITATION.cff
-            yq eval -i '.date-released="${{ env.CURRENT_DATE }}"' CITATION.cff
+          run: yq eval -i '.version="${{ github.event.release.tag_name }}"' CITATION.cff
+
+      - name: Update CITATION.cff date-released
+        uses: mikefarah/yq@v4.34.2
+        with:
+          run: yq eval -i '.date-released="${{ env.CURRENT_DATE }}"' CITATION.cff
 
       - name: Check for changes
         id: changes_check
