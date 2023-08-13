@@ -21,6 +21,10 @@ jobs:
         with:
           fallback: 999.50.60 # Optional fallback tag to use when no tag can be found
 
+      - name: Get collection id
+        run: |
+          echo "The previous release is: ${{ steps.previoustag.outputs.tag }}"
+
       - name: Create a draft on Zenodo Sandbox
         uses: zenodraft/action@0.10.0
         env:
