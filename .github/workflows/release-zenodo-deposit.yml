@@ -21,9 +21,33 @@ jobs:
         with:
           fallback: 999.50.60 # Optional fallback tag to use when no tag can be found
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          cache: 'pip'
+          cache-dependency-path: requirements.txt
+          python-version: '3.9'
+
+      - name: Install Python dependencies
+        run: pip install requests~=2.28.1
+
+      - name: Get current DOI
+        uses: mikefarah/yq@v4.34.2
+        with:
+          cmd: "echo CURRENT_DOI=$(yq '.doi' CITATION.cff) >> $GITHUB_ENV"
+
       - name: Get collection id
+        id: collectionid
         run: |
           echo "The previous release is: ${{ steps.previoustag.outputs.tag }}"
+          if [[ "${{ steps.previoustag.outputs.tag }}" == "999.50.60" ]] then;
+            echo "No previous release, skipping collection id"
+            echo "COLLECTION_ID=''" >> $GITHUB_ENV
+          else
+            COLLECTION_ID=$(DOI=${{ env.CURRENT_DOI }} ZENODO_SANDBOX=true python ./.github/scripts/get_zenodo_collection.py)
+            echo "The collection id is ${COLLECTION_ID}"
+            echo "COLLECTION_ID=$COLLECTION_ID" >> $GITHUB_ENV
+          fi
 
       - name: Create a draft on Zenodo Sandbox
         uses: zenodraft/action@0.10.0
@@ -38,5 +62,5 @@ jobs:
           upsert-location: doi
           sandbox: true
           verbose: true
-          collection: ''
+          collection: ${{ env.COLLECTION_ID }}
           # collection: 123456789 # Docs: https://github.com/marketplace/actions/zenodraft#collection
