@@ -27,7 +27,7 @@
   },
   "publication_date": "2023-08-13",
   "title": "FAIR-by-Design Learning Materials Methodology Training of Trainers",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "upload_type": "lesson",
   "communities": [
     {
@@ -36,21 +36,7 @@
   ],
   "grants": [
     {
-      "code": "101058527",
-      "links": {
-        "self": "https://zenodo.org/api/grants/10.13039/501100000780::101058527"
-      },
-      "title": "Skills for the European Open Science Commons: Creating a Training Ecosystem for Open and FAIR Science",
-      "acronym": "Skills4EOSC",
-      "program": "HE",
-      "funder": {
-        "doi": "10.13039/501100000780",
-        "acronyms": [],
-        "name": "European Commission",
-        "links": {
-          "self": "https://zenodo.org/api/funders/10.13039/501100000780"
-        }
-      }
+      "id": "10.13039/501100000780::101058527"
     }
   ]
 }
