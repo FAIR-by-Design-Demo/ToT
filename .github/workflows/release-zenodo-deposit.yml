@@ -4,9 +4,6 @@ on:
     secrets:
       ZENODO_SANDBOX_ACCESS_TOKEN:
         required: true
-  # release:
-  #   types:
-  #     - published
 jobs:
   zenodo_publish:
     name: Publish on Zenodo
@@ -17,6 +14,12 @@ jobs:
         with:
           fetch-depth: 0
           ref: main
+
+      - name: Get previous tag (if any)
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: 999.50.60 # Optional fallback tag to use when no tag can be found
 
       - name: Create a draft on Zenodo Sandbox
         uses: zenodraft/action@0.10.0
@@ -31,5 +34,5 @@ jobs:
           upsert-location: doi
           sandbox: true
           verbose: true
-          collection: 1230948
+          collection: ''
           # collection: 123456789 # Docs: https://github.com/marketplace/actions/zenodraft#collection
