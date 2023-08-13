@@ -40,7 +40,7 @@ jobs:
         id: collectionid
         run: |
           echo "The previous release is: ${{ steps.previoustag.outputs.tag }}"
-          if [[ "${{ steps.previoustag.outputs.tag }}" == "999.50.60" ]] then;
+          if [[ "${{ steps.previoustag.outputs.tag }}" == "999.50.60" ]]; then
             echo "No previous release, skipping collection id"
             echo "COLLECTION_ID=''" >> $GITHUB_ENV
           else
