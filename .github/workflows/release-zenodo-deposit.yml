@@ -2,7 +2,9 @@ name: Deposit on Zenodo
 on:
   workflow_call:
     secrets:
-      ZENODO_SANDBOX_ACCESS_TOKEN:
+      # ZENODO_SANDBOX_ACCESS_TOKEN:
+      #   required: true
+      ZENODO_ACCESS_TOKEN:
         required: true
 jobs:
   zenodo_publish:
