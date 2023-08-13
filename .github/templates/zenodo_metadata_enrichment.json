@@ -6,21 +6,7 @@
     ],
     "grants": [
         {
-            "code": "101058527",
-            "links": {
-                "self": "https://zenodo.org/api/grants/10.13039/501100000780::101058527"
-            },
-            "title": "Skills for the European Open Science Commons: Creating a Training Ecosystem for Open and FAIR Science",
-            "acronym": "Skills4EOSC",
-            "program": "HE",
-            "funder": {
-                "doi": "10.13039/501100000780",
-                "acronyms": [],
-                "name": "European Commission",
-                "links": {
-                    "self": "https://zenodo.org/api/funders/10.13039/501100000780"
-                }
-            }
+            "id": "10.13039/501100000780::101058527"
         }
     ]
 }
